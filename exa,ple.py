@@ -3,6 +3,8 @@ from azure.identity import AzureCliCredential
 from azure.mgmt.resource import ResourceManagementClient
 from azure.mgmt.network import NetworkManagementClient
 from azure.mgmt.compute import ComputeManagementClient
+from dotenv import load_dotenv
+load_dotenv()
 import os
 
 print(f"Provisioning a virtual machine...some operations might take a minute or two.")
@@ -11,7 +13,7 @@ print(f"Provisioning a virtual machine...some operations might take a minute or 
 credential = AzureCliCredential()
 
 # Retrieve subscription ID from environment variable.
-subscription_id = "dfa814d7-d0df-428b-b092-e69c854c136b"
+subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
 
 
 # Step 1: Provision a resource group
@@ -117,9 +119,9 @@ print(f"Provisioned network interface client {nic_result.name}")
 compute_client = ComputeManagementClient(credential, subscription_id)
 
 VM_NAME = "PythonLab4"
-USERNAME = "c20495892"
+USERNAME = "C20495892"
 KEY_PATH = "/home/" + USERNAME + "/.ssh/authorized_keys"
-PUBLIC_KEY = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDSLaAYQagO0rWSMvdoOy5F/r7A7a/cWAIqyllrLqCChbFzfk9BW4The4T1MvmykIssKVrHwc5CJ9IJ8NCkFc9TOglRky0CkD9wQggMp+WQiRatKq4L1QTEmnRKQsFl9wAF6A5HPpwrKp8oG7qdu/uAU5X0wScU74BkaCZ5GGiid90ZhDtlq+Bh2IDbARjovVcuJg+7GD/VdW88OULobhBuQXSbOsh7nJaPsUEh7fRfpOtau1VJ0lHEEw4qFTqyYpBWl13cIF246a4klWxMDp4H8Y5eDPXDPdMKwc065f2ZD7fKp3UBjMlVS4retnGKpGiXUggk4Phrru4lxNLmLbjQLwqvoZu9xgpxVPel2y5PQt8WNIhoUtO7rn6SZdaGzw5Igpd2iwdEmhAc/SVLMy7p98OF9bRFGMOH7LxDNCDfBFvHEpOK9aZ/MTHppZsv0wUqb/oCjjVMaci3u7dJ3X4O6JuTTF2Xskkf0lbJR8ItXA39L4tyMkL9dhPldA46ZwU= ron_trevor@Rons-MacBook-Air.local\n"
+PUBLIC_KEY = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQCYAvrTmudBmkr1MYkp73suAywHA0PgVo/CIATdKgNFJwVZbKGG2Y22DdpRt/rqNY3AH8s1xy763ajzwvLGffjmn/k+GoVLCv9uHidC2KoCY1SxZCcZqhMqsI41w++7muTp9qkprKeimFrAEFyD2RbrcJNxxox2yTOWgQj3AYfzLoMMEAANqpIRoflSiTsT2jW8xv2ZwzBFw2EjVBrwxFeBH3yvAbXk0Qc9S3O7Sn3Qp9zLa1pQYTfCM2aFjdGtHtrSPrOw/OY69AtJJsQYQN5Ivktmf0BRTOeIWLUnyaujJ6u0lOYwnzf7HBHayyGdPqCrdJQN7iVYBWX9HQNlA0AGClNQVpgzl6yPdvsK6tgoXWZkQ6zCvfvNHlp1BRfiwiCIgrMXK45VcbTUzdDLog8ugTNAdhH5QqdbYXHmK+51Y93swF5vmTy9ViwLIIN/J6RJbLU6Qf1Dz0dgQVszqHMjAfjkU1tW8TtINQwIANWPkbG4q3AQBTRfThJNSbWFhHs= sbw92@DESKTOP-DKKT7H9"
 
 
 print(f"Provisioning virtual machine {VM_NAME}; this operation might take a few minutes.")
